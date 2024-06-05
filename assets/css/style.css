@@ -492,6 +492,23 @@ section {
   transform: skewY(-3deg);
 }
 
+
+.alum-bg {
+  padding: 50px 0;
+  color: #fff;
+}
+
+.alum-bg:before {
+  content: "";
+  background: #1b1b1b;
+  position: absolute;
+  bottom: 0px;
+  top: 0px;
+  left: 0;
+  right: 0;
+  /* transform: skewY(-3deg); */
+}
+
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
