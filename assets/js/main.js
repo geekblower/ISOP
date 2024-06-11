@@ -1,5 +1,5 @@
 
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -108,7 +108,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -117,7 +117,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -127,7 +127,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -201,9 +201,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -211,7 +211,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -290,3 +290,52 @@
   new PureCounter();
 
 })()
+
+
+
+
+document.getElementById('emailForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  var email = document.getElementById('EMAIL').value;
+
+  fetch('https://script.google.com/macros/s/AKfycby-bh9oql2eMZ78xKuGmRjXZrKlZfXyPDFuqkelh9tsfZ_sJxb44ThrbiJDN8Fu-vwUyA/exec', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email: email })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.result === 'success') {
+        alert('Email successfully submitted!');
+        form.reset();
+      } else {
+        alert('There was an error submitting the email.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+
+
+
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxfgvWUuv3f_MX6rrUZ7I-pBdUakyGGu-WZpjaB_wGgJtp-ipIDdamvcG3HMo81L1AVeA/exec'
+const form = document.forms['submit-to-google-sheet']
+const success = document.getElementById('success');
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+    .then(response => {
+      success.innerHTML = "Message successfully sent!";
+
+      setTimeout(function () {
+        success.innerHTML = "";
+      }, 3000)
+      form.reset();
+    })
+    .catch(error => console.error('Error!', error.message))
+})
