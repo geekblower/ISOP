@@ -1,4 +1,3 @@
-
 (function () {
   "use strict";
 
@@ -291,9 +290,6 @@
 
 })()
 
-
-
-
 document.getElementById('emailForm').addEventListener('submit', function (event) {
   event.preventDefault();
   var email = document.getElementById('EMAIL').value;
@@ -317,11 +313,6 @@ document.getElementById('emailForm').addEventListener('submit', function (event)
     })
     .catch(error => console.error('Error:', error));
 });
-
-
-
-
-
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxfgvWUuv3f_MX6rrUZ7I-pBdUakyGGu-WZpjaB_wGgJtp-ipIDdamvcG3HMo81L1AVeA/exec'
 const form = document.forms['submit-to-google-sheet']
